@@ -8,11 +8,12 @@ app.config['SECRET_KEY'] = "S3CRET"
 
 debug = DebugToolbarExtension(app)
 
-url = 'https://api.exchangerate.host/latest'
-response = requests.get(url)
-data = response.json()
+def get_exchange_rates():
+    url = 'https://api.exchangerate.host/latest'
+    response = requests.get(url)
+    data = response.json()
 
-print(data)
+    return data
 
 @app.route("/")
 def homepage_form():
@@ -29,5 +30,7 @@ def convert_currency():
     print(currency2);
     amount = request.args.get("amount")
     print(amount)
+
+
 
     return render_template("form.html")
