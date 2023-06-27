@@ -1,33 +1,45 @@
-from flask import Flask, request, render_template
-from flask_debugtoolbar import DebugToolbarExtension
-
-import requests 
+from flask import Flask, render_template, request
+import requests
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "S3CRET"
 
-debug = DebugToolbarExtension(app)
 
-url = 'https://api.exchangerate.host/latest'
-response = requests.get(url)
-data = response.json()
+# Function to fetch exchange rate data from the API
+def fetch_exchange_rates():
+    url = "https://api.exchangerate.host/latest"
+    response = requests.get(url)
+    data = response.json()
+    return data
 
-print(data)
 
-@app.route("/")
-def homepage_form():
-    """display converter form"""
+# Home route
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        # Fetch exchange rate data
+        exchange_data = fetch_exchange_rates()
+        base_currency = exchange_data['base']
+        date = exchange_data['date']
+        rates = exchange_data['rates']
 
-    return render_template("form.html")
+        # Get form data
+        amount = float(request.form['amount'])
+        from_currency = request.form['from_currency']
+        to_currency = request.form['to_currency']
 
-@app.route("/result", methods=["POST"])
-def convert_currency():
-    """Convert currency after selecting Convert button"""
-    currency1 = request.args("from")
-    print(currency1);
-    currency2 = request.args("to")
-    print(currency2);
-    amount = request.args.get("amount")
-    print(amount)
+        # Convert currencies
+        converted_amount = amount * rates[to_currency] / rates[from_currency]
 
-    return render_template("form.html")
+        return render_template('result.html', base_currency=base_currency, date=date, rates=rates,
+                               converted_amount=converted_amount, from_currency=from_currency,
+                               to_currency=to_currency, amount=amount)
+
+    # Fetch exchange rate data
+    exchange_data = fetch_exchange_rates()
+    rates = exchange_data['rates']
+
+    return render_template('form.html', rates=rates)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
