@@ -2,30 +2,23 @@
 <html>
 <head>
     <title>Forex Exchange Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-<h1>Forex Exchange Calculator</h1>
+<h2>Forex Exchange Calculator</h2>
 
 <form method="POST" action="/">
     <label for="amount">Amount:</label>
     <input type="number" id="amount" name="amount" required step="0.01">
 
     <label for="from_currency">From Currency:</label>
-    <select id="from_currency" name="from_currency" required>
-        {% for currency, rate in rates.items() %}
-        <option value="{{ currency }}">{{ currency }}</option>
-        {% endfor %}
-    </select>
+    <input type="text" id="from_currency" name="from_currency" placeholder="Currency Letter Code" required>
 
     <label for="to_currency">To Currency:</label>
-    <select id="to_currency" name="to_currency" required>
-        {% for currency, rate in rates.items() %}
-        <option value="{{ currency }}">{{ currency }}</option>
-        {% endfor %}
-    </select>
+    <input type="text" id="to_currency" name="to_currency" placeholder="Currency Letter Code" required>
 
-
-    <input type="submit" value="Convert">
+    <input type="submit" id="button" value="Convert">
 </form>
 </body>
 </html>
