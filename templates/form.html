@@ -1,35 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    
-    <title>Forex Converter</title>
+    <title>Forex Exchange Calculator</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-    <div class="formContainer">
-    <h2 class="formHeader"> Forex Converter </h2>
-    <div class="formContentContainer">
-        <form id="currency_converter" method="POST">
-        <div>
-            <label for="field1">From</label>
-            <input type="text" name="fromCurrency" class="formInput" id="to" placeholder="Currency Symbol">
-        </div>
-        <div>
-            <label for="field2">To</label>
-            <input type="text" name="toCurrency" class="formInput" id="from" placeholder="Currency Symbol">
-        </div>
-        <div>
-            <label for="field3">Amount</label>
-            <input type="text" name="Value" class="formInput" id="value" placeholder="Value">
-        </div>
-        <div>
-            <input type="submit" class="submitButton" name="submitButton" value="Convert">
-        </div>   
+<h2>Forex Exchange Calculator</h2>
 
+<form method="POST" action="/">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" required step="0.01">
+
+    <label for="from_currency">From Currency:</label>
+    <input type="text" id="from_currency" name="from_currency" placeholder="Currency Letter Code" required>
+
+    <label for="to_currency">To Currency:</label>
+    <input type="text" id="to_currency" name="to_currency" placeholder="Currency Letter Code" required>
+
+    <input type="submit" id="button" value="Convert">
 </form>
-</div>
-</div>
-</div>
 </body>
 </html>
