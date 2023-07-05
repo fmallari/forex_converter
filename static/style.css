@@ -10,7 +10,7 @@ input {
 }
 
 input[type=text] {
-    padding: 4px;
+    padding: 5px;
     box-shadow: 2px 2px 5px
     rgba(0,0,0,0.05);
     border-radius: 3px;
@@ -18,15 +18,15 @@ input[type=text] {
 }
 
 #to_currency:hover {
-    border: 4px solid purple;
+    border: 5px solid purple;
 }
 
 #amount:hover{
-    border: 4px solid purple;
+    border: 5px solid purple;
 }
 
 input[type=number] {
-    padding: 4px;
+    padding: 5px;
     box-shadow: 2px 2px 5px
     rgba(0,0,0,0.05);
     border-radius: 3px;
@@ -34,7 +34,7 @@ input[type=number] {
 }
 
 #from_currency:hover {
-    border: 4px solid purple;
+    border: 5px solid purple;
 }
 
 input[type=submit] {
