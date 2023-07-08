@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-
+app.config['SECRET_KEY'] = 'secr3t'
 # Function to fetch exchange rate data from the API
 def fetch_exchange_rates():
     url = "https://api.exchangerate.host/latest"
@@ -26,18 +26,23 @@ def home():
         amount = float(request.form['amount'])
         from_currency = request.form['from_currency']
         to_currency = request.form['to_currency']
+        flash("Valid entry")
 
         # Convert currencies
         converted_amount = amount * rates[to_currency] / rates[from_currency]
-
-        return render_template('result.html', base_currency=base_currency, date=date, rates=rates,
+        
+        
+        return render_template('form.html', base_currency=base_currency, date=date, rates=rates,
                                converted_amount=converted_amount, from_currency=from_currency,
                                to_currency=to_currency, amount=amount)
+
+   
 
     # Fetch exchange rate data
     exchange_data = fetch_exchange_rates()
     rates = exchange_data['rates']
 
+    
     return render_template('form.html', rates=rates)
 
 

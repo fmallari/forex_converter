@@ -3,15 +3,26 @@
 <head>
     <title>Forex Exchange Calculator</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <h2>Forex Exchange Calculator</h2>
 
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+ 
+{% endfor %}
+
 <form method="POST" action="/">
     <label for="amount">Amount:</label>
     <input type="number" id="amount" name="amount" required step="0.01">
-
+    
     <label for="from_currency">From Currency:</label>
     <input type="text" id="from_currency" name="from_currency" placeholder="Currency Letter Code" required>
 
@@ -20,5 +31,18 @@
 
     <input type="submit" id="button" value="Convert">
 </form>
+
+<!-- Show conversion result -->
+
+<h2>Conversion Result</h2>
+<p>Base Currency: {{ base_currency }}</p>
+<p>Date: {{ date }}</p>
+<p>Converted Amount: {{ converted_amount }}</p>
+<p>From: {{ amount }} {{ from_currency }}</p>
+<p>To: {{ converted_amount }} {{ to_currency }}</p>
 </body>
+
 </html>
+
+</body>
+</html> 
